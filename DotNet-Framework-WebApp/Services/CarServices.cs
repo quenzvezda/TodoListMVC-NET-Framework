@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using DotNet_Framework_WebApp.Models;
@@ -28,14 +29,44 @@ namespace DotNet_Framework_WebApp.Services
         }
 
         // Get All Cars including Tires (Store Procedure)
-        public List<CarWithTireCount> GetAllCarsWithTireCount()
+        public List<CarWithTireCount> GetAllCarsWithTireCountOld()
         {
             using (var context = new AppDbContext())
             {
                 return context.Database.SqlQuery<CarWithTireCount>("GetAllCars").ToList();
             }
         }
+        
+        public DataTable GetAllCarsWithTireCount()
+        {
+            using (var context = new AppDbContext())
+            {
+                // Open the database connection
+                var connection = context.Database.Connection;
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
 
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "GetAllCars";
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Create a DataTable to hold the results
+                    var dataTable = new DataTable();
+
+                    // Execute the command
+                    using (var reader = command.ExecuteReader())
+                    {
+                        dataTable.Load(reader);
+                    }
+
+                    return dataTable;
+                }
+            }
+        }
+        
         // Get a Car by Id including Tires
         public Car GetCarById(int id, bool includeTires = false)
         {
