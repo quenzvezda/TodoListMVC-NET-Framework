@@ -1,19 +1,23 @@
-﻿@model List<DotNet_Framework_WebApp.Models.Car>
+﻿@model IEnumerable<DotNet_Framework_WebApp.ViewModels.CarWithTireCount>
 
-<h2>Cars</h2>
 <table>
+    <thead>
     <tr>
+        <th>ID</th>
         <th>Brand</th>
         <th>Color</th>
-        <th>Tires</th>
+        <th>Tire Count</th>
         <th>Actions</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach (var car in Model)
     {
         <tr>
+            <td>@car.Id</td>
             <td>@car.Brand</td>
             <td>@car.Color</td>
-            <td>@car.Tires.Count</td>
+            <td>@car.TireCount</td> <!-- Tampilkan jumlah Tires -->
             <td>
                 <a href="/Car/Details/@car.Id">Details</a> |
                 <a href="/Car/Edit/@car.Id">Edit</a> |
@@ -21,5 +25,6 @@
             </td>
         </tr>
     }
+    </tbody>
 </table>
 <a href="/Car/Create">Add New Car</a>

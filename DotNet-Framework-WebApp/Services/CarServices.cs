@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using DotNet_Framework_WebApp.Models;
+using DotNet_Framework_WebApp.ViewModels;
 
 namespace DotNet_Framework_WebApp.Services
 {
@@ -14,7 +15,7 @@ namespace DotNet_Framework_WebApp.Services
         {
             _context = context;
         }
-
+        
         // Get All Cars including Tires
         public List<Car> GetAllCars(bool includeTires = false)
         {
@@ -24,6 +25,15 @@ namespace DotNet_Framework_WebApp.Services
             }
 
             return _context.Cars.ToList();
+        }
+
+        // Get All Cars including Tires (Store Procedure)
+        public List<CarWithTireCount> GetAllCarsWithTireCount()
+        {
+            using (var context = new AppDbContext())
+            {
+                return context.Database.SqlQuery<CarWithTireCount>("GetAllCars").ToList();
+            }
         }
 
         // Get a Car by Id including Tires

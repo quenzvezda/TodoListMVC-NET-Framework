@@ -16,11 +16,11 @@ namespace DotNet_Framework_WebApp.Controllers
             _carService = new CarService(context);
         }
 
-        // GET: Car
+        // GET: All Cars Using Store Procedure
         public ActionResult Index()
         {
-            var cars = _carService.GetAllCars(includeTires: true);
-            return View(cars);
+            var carsWithTireCount = _carService.GetAllCarsWithTireCount();
+            return View(carsWithTireCount);
         }
 
         // GET: Car/Details/{id}
