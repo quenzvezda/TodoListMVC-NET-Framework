@@ -15,8 +15,11 @@ namespace DotNet_Framework_WebApp.Models
         [Required]
         public int Health { get; set; }
 
+        [Column(TypeName = "datetime2")]
         public DateTime CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime UpdatedDate { get; set; }
 
         // Relasi ke Car
         [ForeignKey("Car")]

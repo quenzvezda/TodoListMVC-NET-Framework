@@ -1,0 +1,25 @@
+﻿@model List<DotNet_Framework_WebApp.Models.Car>
+
+<h2>Cars</h2>
+<table>
+    <tr>
+        <th>Brand</th>
+        <th>Color</th>
+        <th>Tires</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var car in Model)
+    {
+        <tr>
+            <td>@car.Brand</td>
+            <td>@car.Color</td>
+            <td>@car.Tires.Count</td>
+            <td>
+                <a href="/Car/Details/@car.Id">Details</a> |
+                <a href="/Car/Edit/@car.Id">Edit</a> |
+                <a href="/Car/Delete/@car.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="/Car/Create">Add New Car</a>

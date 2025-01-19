@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotNet_Framework_WebApp.Models
 {
@@ -16,8 +17,11 @@ namespace DotNet_Framework_WebApp.Models
         [StringLength(50)]
         public string Color { get; set; }
 
+        [Column(TypeName = "datetime2")]
         public DateTime CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime UpdatedDate { get; set; }
         
         // Relasi ke Tire
         public virtual ICollection<Tire> Tires { get; set; }

@@ -15,6 +15,15 @@ namespace DotNet_Framework_WebApp
     {
         protected void Application_Start()
         {
+            // Set the database initializer
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
+
+            // Force database initialization
+            using (var context = new AppDbContext())
+            {
+                context.Database.Initialize(force: true);
+            }
+            
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

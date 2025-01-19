@@ -1,0 +1,14 @@
+﻿@model DotNet_Framework_WebApp.Models.Car
+
+<h2>Car Details</h2>
+<p><strong>Brand:</strong> @Model.Brand</p>
+<p><strong>Color:</strong> @Model.Color</p>
+<p><strong>Tires:</strong></p>
+<ul>
+    @foreach (var tire in Model.Tires)
+    {
+        <li>@tire.Brand - Health: @tire.Health%</li>
+    }
+</ul>
+<a href="/Car/AddTires/@Model.Id">Add Tires</a> |
+<a href="/Car/Index">Back to List</a>

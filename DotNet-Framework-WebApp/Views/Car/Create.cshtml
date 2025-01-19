@@ -1,0 +1,62 @@
+﻿@model DotNet_Framework_WebApp.Models.Car
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Car</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let tireIndex = 0;
+
+            // Add new tire row
+            $('#addTireButton').click(function (e) {
+                e.preventDefault();
+
+                const tireRow = `
+                    <div class="tire-row" data-index="${tireIndex}">
+                        <label>Brand:</label>
+                        <input type="text" name="Tires[${tireIndex}].Brand" required />
+                        <label>Health:</label>
+                        <input type="number" name="Tires[${tireIndex}].Health" min="0" max="100" required />
+                        <button type="button" class="remove-tire">Remove</button>
+                    </div>
+                `;
+                $('#tireContainer').append(tireRow);
+                tireIndex++;
+            });
+
+            // Remove tire row
+            $('#tireContainer').on('click', '.remove-tire', function () {
+                $(this).closest('.tire-row').remove();
+            });
+        });
+    </script>
+</head>
+<body>
+<h2>Create Car</h2>
+@using (Html.BeginForm("Create", "Car", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <label>Brand:</label>
+        <input type="text" name="Brand" required />
+    </div>
+    <div>
+        <label>Color:</label>
+        <input type="text" name="Color" required />
+    </div>
+    <hr />
+    <h3>Tires</h3>
+    <div id="tireContainer">
+        <!-- Dynamic tire rows will be added here -->
+    </div>
+    <button id="addTireButton">Add Tire</button>
+    <br />
+    <br />
+    <button type="submit">Save</button>
+}
+<br />
+<a href="/Car/Index">Back to List</a>
+</body>
+</html>
