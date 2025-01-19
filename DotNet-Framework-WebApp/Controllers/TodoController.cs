@@ -12,23 +12,15 @@ namespace DotNet_Framework_WebApp.Controllers
 
         public TodoController()
         {
-            var context = new TodoItemContext();
+            var context = new AppDbContext();
             _todoService = new TodoService(context);
         }
         
         public ActionResult Index()
         {
-            using (var context = new TodoItemContext())
+            using (var context = new AppDbContext())
             {
-                var items = context.TodoItems.ToList();
-                Console.WriteLine("Number of items: " + items.Count);
-
-                foreach (var item in items)
-                {
-                    Console.WriteLine($"Item: {item.Id}, Title: {item.Title}, IsComplete: {item.IsComplete}");
-                }
-
-                return View(items);
+                return View(_todoService.GetAllTodoItems());
             }
         }
 

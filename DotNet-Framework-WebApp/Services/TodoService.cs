@@ -6,9 +6,9 @@ namespace DotNet_Framework_WebApp.Services
 {
     public class TodoService
     {
-        private readonly TodoItemContext _context;
+        private readonly AppDbContext _context;
 
-        public TodoService(TodoItemContext context)
+        public TodoService(AppDbContext context)
         {
             _context = context;
         }
