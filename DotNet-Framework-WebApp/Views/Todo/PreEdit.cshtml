@@ -1,0 +1,18 @@
+﻿@model DotNet_Framework_WebApp.Models.TodoItem
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Todo</title>
+</head>
+<body>
+<h1>Edit Todo</h1>
+<form action="/Todo/Edit" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="text" name="title" value="@Model.Title" />
+    <input type="checkbox" name="isComplete" @(Model.IsComplete ? "checked" : "")>Selesai ?</input>
+    <button type="submit">Save</button>
+</form>
+<a href="/Todo/Index">Back to List</a>
+</body>
+</html>

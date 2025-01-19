@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using DotNet_Framework_WebApp.Models;
 using DotNet_Framework_WebApp.Services;
@@ -15,11 +16,20 @@ namespace DotNet_Framework_WebApp.Controllers
             _todoService = new TodoService(context);
         }
         
-        // GET: Todo
         public ActionResult Index()
         {
-            var todoItems = _todoService.GetAllTodoItems();
-            return View(todoItems);
+            using (var context = new TodoItemContext())
+            {
+                var items = context.TodoItems.ToList();
+                Console.WriteLine("Number of items: " + items.Count);
+
+                foreach (var item in items)
+                {
+                    Console.WriteLine($"Item: {item.Id}, Title: {item.Title}, IsComplete: {item.IsComplete}");
+                }
+
+                return View(items);
+            }
         }
 
         // GET: Todo/PreAdd
@@ -56,16 +66,16 @@ namespace DotNet_Framework_WebApp.Controllers
 
         // POST: Todo/Edit
         [HttpPost]
-        public ActionResult Edit(int id, string title, bool isComplete)
+        public ActionResult Edit(int id, string title, FormCollection form)
         {
             var todoItem = _todoService.GetTodoById(id);
             if (todoItem != null)
             {
                 todoItem.Title = title;
-                todoItem.IsComplete = isComplete;
+                todoItem.IsComplete = form["isComplete"] == "on"; // Checkbox mengirimkan "on" jika dicentang
                 todoItem.UpdatedDate = DateTime.Now;
 
-                if (isComplete)
+                if (todoItem.IsComplete)
                 {
                     todoItem.FinishDate = DateTime.Now;
                 }

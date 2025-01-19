@@ -1,0 +1,50 @@
+@model IEnumerable<DotNet_Framework_WebApp.Models.TodoItem>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+</head>
+<body>
+<h1>Todo List</h1>
+
+<!-- Button untuk Add Todo -->
+<a href="/Todo/PreAdd">New Todo</a>
+
+<br/><br/>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>IsComplete</th>
+        <th>Created Date</th>
+        <th>Updated Date</th>
+        <th>Finish Date</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            <td>@item.IsComplete</td>
+            <td>@item.CreatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+            <td>@(item.UpdatedDate.HasValue ? item.UpdatedDate.Value.ToString("yyyy-MM-dd HH:mm") : "-")</td>
+            <td>@(item.FinishDate.HasValue ? item.FinishDate.Value.ToString("yyyy-MM-dd HH:mm") : "-")</td>
+            <td>
+                @if (!item.IsComplete)
+                {
+                    <a href="/Todo/PreEdit/@item.Id">Edit</a>
+                }
+                <a href="/Todo/Delete/@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+</body>
+</html>
