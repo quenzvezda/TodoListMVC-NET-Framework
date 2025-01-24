@@ -9,6 +9,7 @@
             <th>ID</th>
             <th>Brand</th>
             <th>Color</th>
+            <th>Created Date</th>
             <th>Tire Count</th>
             <th>Actions</th>
         </tr>
@@ -20,6 +21,7 @@
                 <td>@row["Id"]</td>
                 <td>@row["Brand"]</td>
                 <td>@row["Color"]</td>
+                <td>@row["CreatedDate"]</td>
                 <td>@row["TireCount"]</td>
                 <td>
                     <a href="/Car/Details/@row["Id"]" class="btn btn-sm btn-primary">Details</a>

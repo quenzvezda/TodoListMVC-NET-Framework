@@ -133,6 +133,11 @@
         <Compile Include="Models\Car.cs" />
         <Compile Include="Models\Tire.cs" />
         <Compile Include="Models\TodoItem.cs" />
+        <Compile Include="Pages\Todo.aspx.cs">
+          <SubType>ASPXCodeBehind</SubType>
+          <DependentUpon>Todo.aspx</DependentUpon>
+        </Compile>
+        <Compile Include="Pages\Todo.aspx.designer.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Services\CarServices.cs" />
         <Compile Include="Services\TodoService.cs" />
@@ -147,6 +152,7 @@
         <Content Include="fonts\glyphicons-halflings-regular.svg" />
         <Content Include="Global.asax" />
         <Content Include="Content\Site.css" />
+        <Content Include="Pages\Todo.aspx" />
         <Content Include="Scripts\bootstrap.js" />
         <Content Include="Scripts\bootstrap.min.js" />
         <None Include="Scripts\jquery-3.3.1.intellisense.js" />
